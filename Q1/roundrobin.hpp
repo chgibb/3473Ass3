@@ -8,6 +8,7 @@ class RoundRobin
 {
     public:
         std::list<::Process> processes;
+        std::list<::Process*> procQueue;
         int timeQuantum;
 
         template<class T>
@@ -45,6 +46,6 @@ class RoundRobin
             }
             return true;
         }
-        
+        void runQueueWithProcesses();
         RoundRobin();
 };
