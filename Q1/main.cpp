@@ -7,5 +7,6 @@ int main(int argc,char*argv[])
 
     RoundRobin rr;
     rr.loadFromStream<std::ifstream>(file);
+    file.close();
     return 0;
 }
