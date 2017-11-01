@@ -6,5 +6,9 @@ class Process
         int priority;
         int burstTime;
         int arrivalTime;
+
+        int waitingTime;
+        int aroundTime;
+        
         Process();
 };
