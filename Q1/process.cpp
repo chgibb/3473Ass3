@@ -1,2 +1,2 @@
 #include "process.hpp"
-Process::Process() = default;
+::Process::Process() = default;

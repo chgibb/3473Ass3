@@ -7,7 +7,7 @@
 class RoundRobin
 {
     public:
-        std::list<Process> processes;
+        std::list<::Process> processes;
         int timeQuantum;
 
         template<class T>
