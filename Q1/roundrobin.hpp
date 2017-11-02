@@ -10,7 +10,8 @@ class RoundRobin
         std::list<::Process> processes;
         std::list<::Process*> procQueue;
         int timeQuantum;
-
+        int ticks;
+        
         template<class T>
         bool loadFromStream(T&stream)
         {
