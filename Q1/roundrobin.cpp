@@ -3,6 +3,7 @@
 #include "roundrobin.hpp"
 void ::RoundRobin::initForRun()
 {
+    this->ticks = 0;
     this->procQueue.clear();
     {
         auto procEnd = this->processes.end();
