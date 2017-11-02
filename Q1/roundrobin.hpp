@@ -48,4 +48,7 @@ class RoundRobin
         }
         void runQueueWithProcesses();
         RoundRobin();
+    private:
+        std::list<::Process*> notArrived;
+        void initForRun();
 };
