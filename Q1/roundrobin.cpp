@@ -5,6 +5,7 @@ void ::RoundRobin::initForRun()
 {
     this->ticks = 0;
     this->procQueue.clear();
+    this->notArrived.clear();
     {
         auto procEnd = this->processes.end();
         for(auto it = this->processes.begin(); it != procEnd; ++it)
