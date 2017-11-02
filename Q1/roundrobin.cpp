@@ -30,6 +30,8 @@ void ::RoundRobin::initForRun()
 void ::RoundRobin::runQueueWithProcesses()
 {
     this->initForRun();
+    ::Process**running;
+    running = &this->procQueue.front();
 }
 
 ::RoundRobin::RoundRobin() = default;
