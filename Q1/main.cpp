@@ -11,5 +11,7 @@ int main(int argc,char*argv[])
     file.close();
 
     rr.runQueueWithProcesses();
+
+    rr.printProcessStats<decltype(std::cout)>(std::cout);
     return 0;
 }
