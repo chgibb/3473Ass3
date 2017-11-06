@@ -47,6 +47,11 @@ class RoundRobin
             }
             return true;
         }
+        template <class T>
+        void printProcessStats(T&stream)
+        {
+            
+        }
         void runQueueWithProcesses();
         RoundRobin();
     private:
