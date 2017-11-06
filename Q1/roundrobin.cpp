@@ -43,6 +43,7 @@ void ::RoundRobin::runQueueWithProcesses()
     int ticksSinceLastPreempt = 0;
     while(this->procQueue.size() != 0 && this->notArrived.size() != 0)
     {
+        running->aroundTime++;
         if(this->notArrived.front()->arrivalTime == this->ticks)
         {
             this->procQueue.push_back(&(*this->notArrived.front()));
