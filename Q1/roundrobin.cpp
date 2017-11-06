@@ -57,7 +57,7 @@ void ::RoundRobin::runQueueWithProcesses()
     this->initForRun();
     ::Process*running;
     int ticksSinceLastPreempt = 0;
-    while(this->ticks < 200)
+    while(!this->notArrived.empty() || !this->procQueue.empty())
     {
         this->ticks++;
         this->incrementWaitingTimes();
