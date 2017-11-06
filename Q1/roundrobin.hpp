@@ -7,6 +7,10 @@
 class RoundRobin
 {
     public:
+        //!
+        /*!
+        
+        */
         std::list<::Process> processes;
         std::list<::Process*> procQueue;
         int timeQuantum;

@@ -2,6 +2,15 @@
 #include <fstream>
 #include <cstring>
 #include "roundrobin.hpp"
+/**
+ * @brief 
+ * 
+ * Main entry
+ * 
+ * @param argc 
+ * @param char*argv[] 
+ * @return int 
+ */
 int main(int argc,char*argv[])
 {
     if(argc < 3)
