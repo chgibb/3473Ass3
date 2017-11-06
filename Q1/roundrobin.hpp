@@ -67,4 +67,5 @@ class RoundRobin
         std::list<::Process*> notArrived;
         void initForRun();
         void preemptRunningProcess();
+        void incrementWaitingTimes();
 };

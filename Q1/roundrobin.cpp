@@ -40,6 +40,18 @@ void ::RoundRobin::preemptRunningProcess()
     this->procQueue.push_back(runningProc);
 }
 
+void ::RoundRobin::incrementWaitingTimes()
+{
+    if(this->procQueue.size() == 1)
+        return;
+    auto procEnd = this->procQueue.end();
+    for(auto it = this->procQueue.begin(); it != procEnd; ++it)
+    {
+        if(&(*it) != &this->procQueue.front())
+            (*it)->waitingTime++;
+    }
+}
+
 void ::RoundRobin::runQueueWithProcesses()
 {
     this->initForRun();
@@ -48,7 +60,7 @@ void ::RoundRobin::runQueueWithProcesses()
     while(this->ticks < 200)
     {
         this->ticks++;
-        
+        this->incrementWaitingTimes();
         if(!this->notArrived.empty() && this->notArrived.front()->arrivalTime == this->ticks)
         {
             this->procQueue.push_back(&(*this->notArrived.front()));
@@ -65,7 +77,7 @@ void ::RoundRobin::runQueueWithProcesses()
             std::cout<<"running nothing ticks"<<this->ticks<<std::endl;
             continue;
         }
-        
+
         if(ticksSinceLastPreempt >= this->timeQuantum)
         {
             if(running->aroundTime >= running->burstTime)
