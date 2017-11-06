@@ -2,13 +2,13 @@
 class Process
 {
     public:
-        int id;
-        int priority;
-        int burstTime;
-        int arrivalTime;
+        int id = 0;
+        int priority = 0;
+        int burstTime = 0;
+        int arrivalTime = 0;
 
-        int waitingTime;
-        int aroundTime;
+        int waitingTime = 0;
+        int aroundTime = 0;
         
         Process();
 };
