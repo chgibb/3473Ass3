@@ -32,6 +32,15 @@ void ::RoundRobin::runQueueWithProcesses()
     this->initForRun();
     ::Process**running;
     running = &this->procQueue.front();
+    while(this->procQueue.size() != 0 && this->notArrived.size() != 0)
+    {
+        if(this->notArrived.front()->arrivalTime == this->ticks)
+        {
+            this->procQueue.push_back(&(*this->notArrived.front()));
+            this->notArrived.pop_front();
+        }
+        this->ticks++;
+    }
 }
 
 ::RoundRobin::RoundRobin() = default;
