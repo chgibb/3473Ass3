@@ -50,7 +50,16 @@ class RoundRobin
         template <class T>
         void printProcessStats(T&stream)
         {
-            
+            auto procEnd = this->processes.end();
+            for(auto it = this->processes.begin(); it != procEnd; ++it)
+            {
+                stream<<"id: "<<it->id<<std::endl;
+                stream<<"   priority: "<<it->priority<<std::endl;
+                stream<<"   burst time: "<<it->burstTime<<std::endl;
+                stream<<"   arrival time: "<<it->arrivalTime<<std::endl;
+                stream<<"   waiting time: "<<it->waitingTime<<std::endl;
+                stream<<"   around time: "<<it->aroundTime<<std::endl;
+            }
         }
         void runQueueWithProcesses();
         RoundRobin();
