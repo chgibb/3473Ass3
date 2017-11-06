@@ -29,14 +29,17 @@ void ::RoundRobin::initForRun()
 
 void ::RoundRobin::preemptRunningProcess()
 {
-    
+    ::Process*runningProc;
+    runningProc = &(*this->procQueue.front());
+    this->procQueue.pop_front();
+    this->procQueue.push_back(runningProc);
 }
 
 void ::RoundRobin::runQueueWithProcesses()
 {
     this->initForRun();
-    ::Process**running;
-    running = &this->procQueue.front();
+    ::Process*running;
+    running = &(*this->procQueue.front());
     int ticksSinceLastPreempt = 0;
     while(this->procQueue.size() != 0 && this->notArrived.size() != 0)
     {
@@ -44,6 +47,10 @@ void ::RoundRobin::runQueueWithProcesses()
         {
             this->procQueue.push_back(&(*this->notArrived.front()));
             this->notArrived.pop_front();
+        }
+        if(ticksSinceLastPreempt == this->timeQuantum)
+        {
+            this->preemptRunningProcess();
         }
         this->ticks++;
         ticksSinceLastPreempt++;
