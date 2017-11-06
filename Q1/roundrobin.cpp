@@ -22,6 +22,10 @@ void ::RoundRobin::initForRun()
         this->notArrived.sort([this](::Process*&a,::Process*&b) -> bool{
             return a->arrivalTime < b->arrivalTime;
         });
+        for(auto it = this->notArrived.begin(); it != this->notArrived.end(); ++it)
+        {
+            std::cout<<"id "<<(*it)->id<<" arrival "<<(*it)->arrivalTime<<std::endl;
+        }
     }
     if(this->procQueue.size() == 0)
         throw std::runtime_error("At least one process must have an arrival time of 0");
@@ -31,6 +35,7 @@ void ::RoundRobin::preemptRunningProcess()
 {
     ::Process*runningProc;
     runningProc = &(*this->procQueue.front());
+    std::cout<<"preempting "<<runningProc->id<<std::endl;
     this->procQueue.pop_front();
     this->procQueue.push_back(runningProc);
 }
@@ -40,22 +45,46 @@ void ::RoundRobin::runQueueWithProcesses()
     this->initForRun();
     ::Process*running;
     int ticksSinceLastPreempt = 0;
-    while(this->procQueue.size() != 0 && this->notArrived.size() != 0)
+    while(this->ticks < 200)
     {
-        running = &(*this->procQueue.front());
-        running->aroundTime++;
-        if(this->notArrived.front()->arrivalTime == this->ticks)
+        this->ticks++;
+        
+        if(!this->notArrived.empty() && this->notArrived.front()->arrivalTime == this->ticks)
         {
             this->procQueue.push_back(&(*this->notArrived.front()));
             this->notArrived.pop_front();
         }
-        if(ticksSinceLastPreempt == this->timeQuantum)
+        if(!this->procQueue.empty())
         {
-            this->preemptRunningProcess();
+            running = &(*this->procQueue.front());
+            std::cout<<"running "<<running->id<<" ticks "<<this->ticks<<std::endl;
+            running->aroundTime++;
         }
-        this->ticks++;
-        ticksSinceLastPreempt++;
+        else
+        {
+            std::cout<<"running nothing ticks"<<this->ticks<<std::endl;
+            continue;
+        }
+        
+        if(ticksSinceLastPreempt >= this->timeQuantum)
+        {
+            if(running->aroundTime >= running->burstTime)
+            {
+                std::cout<<"removing "<<running->id<<std::endl;
+                this->procQueue.pop_front();
+            }
+            else
+            {
+                this->preemptRunningProcess();
+            }
+            ticksSinceLastPreempt = 0;
+
+        }
+        else
+            ticksSinceLastPreempt++;
+
     }
+    std::cout<<"finished at "<<this->ticks<<std::endl;
 }
 
 ::RoundRobin::RoundRobin() = default;
