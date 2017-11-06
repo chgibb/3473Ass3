@@ -22,10 +22,12 @@ void ::RoundRobin::initForRun()
         this->notArrived.sort([this](::Process*&a,::Process*&b) -> bool{
             return a->arrivalTime < b->arrivalTime;
         });
-        for(auto it = this->notArrived.begin(); it != this->notArrived.end(); ++it)
-        {
-            std::cout<<"id "<<(*it)->id<<" arrival "<<(*it)->arrivalTime<<std::endl;
-        }
+        #ifdef LOGRUNNINGQUEUE
+            for(auto it = this->notArrived.begin(); it != this->notArrived.end(); ++it)
+            {
+                std::cout<<"id "<<(*it)->id<<" arrival "<<(*it)->arrivalTime<<std::endl;
+            }
+        #endif
     }
     if(this->procQueue.size() == 0)
         throw std::runtime_error("At least one process must have an arrival time of 0");
@@ -35,7 +37,9 @@ void ::RoundRobin::preemptRunningProcess()
 {
     ::Process*runningProc;
     runningProc = &(*this->procQueue.front());
-    std::cout<<"preempting "<<runningProc->id<<std::endl;
+    #ifdef LOGRUNNINGQUEUE
+        std::cout<<"preempting "<<runningProc->id<<std::endl;
+    #endif
     this->procQueue.pop_front();
     this->procQueue.push_back(runningProc);
 }
@@ -69,12 +73,16 @@ void ::RoundRobin::runQueueWithProcesses()
         if(!this->procQueue.empty())
         {
             running = &(*this->procQueue.front());
-            std::cout<<"running "<<running->id<<" ticks "<<this->ticks<<std::endl;
+            #ifdef LOGRUNNINGQUEUE
+                std::cout<<"running "<<running->id<<" ticks "<<this->ticks<<std::endl;
+            #endif
             running->aroundTime++;
         }
         else
         {
-            std::cout<<"running nothing ticks"<<this->ticks<<std::endl;
+            #ifdef LOGRUNNINGQUEUE
+                std::cout<<"running nothing ticks"<<this->ticks<<std::endl;
+            #endif
             continue;
         }
 
@@ -82,7 +90,9 @@ void ::RoundRobin::runQueueWithProcesses()
         {
             if(running->aroundTime >= running->burstTime)
             {
-                std::cout<<"removing "<<running->id<<std::endl;
+                #ifdef LOGRUNNINGQUEUE
+                    std::cout<<"removing "<<running->id<<std::endl;
+                #endif
                 this->procQueue.pop_front();
             }
             else
@@ -96,7 +106,9 @@ void ::RoundRobin::runQueueWithProcesses()
             ticksSinceLastPreempt++;
 
     }
-    std::cout<<"finished at "<<this->ticks<<std::endl;
+    #ifdef LOGRUNNINGQUEUE
+        std::cout<<"finished at "<<this->ticks<<std::endl;
+    #endif
 }
 
 ::RoundRobin::RoundRobin() = default;
