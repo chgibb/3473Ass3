@@ -52,4 +52,5 @@ class RoundRobin
     private:
         std::list<::Process*> notArrived;
         void initForRun();
+        void preemptRunningProcess();
 };

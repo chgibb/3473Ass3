@@ -27,11 +27,17 @@ void ::RoundRobin::initForRun()
         throw std::runtime_error("At least one process must have an arrival time of 0");
 }
 
+void ::RoundRobin::preemptRunningProcess()
+{
+    
+}
+
 void ::RoundRobin::runQueueWithProcesses()
 {
     this->initForRun();
     ::Process**running;
     running = &this->procQueue.front();
+    int ticksSinceLastPreempt = 0;
     while(this->procQueue.size() != 0 && this->notArrived.size() != 0)
     {
         if(this->notArrived.front()->arrivalTime == this->ticks)
@@ -40,6 +46,7 @@ void ::RoundRobin::runQueueWithProcesses()
             this->notArrived.pop_front();
         }
         this->ticks++;
+        ticksSinceLastPreempt++;
     }
 }
 
