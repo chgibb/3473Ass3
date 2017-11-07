@@ -7,15 +7,46 @@
 class RoundRobin
 {
     public:
-        //!
-        /*!
-        
-        */
+        /**
+         * @brief 
+         * 
+         * All processes to run
+         * 
+         */
         std::list<::Process> processes;
+
+        /**
+         * @brief 
+         * 
+         * Processes being run
+         * 
+         */
         std::list<::Process*> procQueue;
+
+        /**
+         * @brief 
+         * 
+         * Time quantum to preempt at
+         * 
+         */
         int timeQuantum;
+
+        /**
+         * @brief 
+         * 
+         * Total number of ticks run
+         * 
+         */
         int ticks;
         
+        /**
+         * @brief 
+         * 
+         * Populates the process list reading from stream
+         * 
+         * @param stream 
+         * @return bool
+         */
         template<class T>
         bool loadFromStream(T&stream)
         {
@@ -51,6 +82,14 @@ class RoundRobin
             }
             return true;
         }
+
+        /**
+         * @brief 
+         * 
+         * Writes property names and values for all processes to stream
+         * 
+         * @param stream 
+         */
         template <class T>
         void printProcessStats(T&stream)
         {
@@ -65,11 +104,46 @@ class RoundRobin
                 stream<<"   around time: "<<it->aroundTime<<std::endl;
             }
         }
+
+        /**
+         * @brief 
+         * 
+         * Run the round robin algorithm
+         * 
+         */
         void runQueueWithProcesses();
+
         RoundRobin();
     private:
+        /**
+         * @brief 
+         * 
+         * All processes which have not yet arrived
+         * 
+         */
         std::list<::Process*> notArrived;
+
+        /**
+         * @brief 
+         * 
+         * Prepare for a fresh run of the algorithm
+         * 
+         */
         void initForRun();
+
+        /**
+         * @brief 
+         * 
+         * Preempt the currently running process
+         * 
+         */
         void preemptRunningProcess();
+        
+        /**
+         * @brief 
+         * 
+         * Increment the waiting time on all waiting processes
+         * 
+         */
         void incrementWaitingTimes();
 };
