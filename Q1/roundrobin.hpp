@@ -4,6 +4,12 @@
 #include <cstring>
 #include <iostream>
 #include "process.hpp"
+/**
+ * @brief 
+ * 
+ * Singleton to load and run repeated round robins
+ * 
+ */
 class RoundRobin
 {
     public:
@@ -138,7 +144,7 @@ class RoundRobin
          * 
          */
         void preemptRunningProcess();
-        
+
         /**
          * @brief 
          * 
