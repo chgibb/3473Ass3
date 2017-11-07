@@ -1,6 +1,7 @@
 #include <stdexcept>
 #include <list>
 #include "roundrobin.hpp"
+
 void ::RoundRobin::initForRun()
 {
     this->ticks = 0;
