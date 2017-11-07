@@ -1,3 +1,6 @@
+#ifdef LOGRUNNINGQUEUE
+    #include <iostream>
+#endif
 #include <stdexcept>
 #include <list>
 #include "roundrobin.hpp"
