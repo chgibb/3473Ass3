@@ -12,7 +12,7 @@
  * Main entry
  * 
  * @param argc 
- * @param char*argv[] 
+ * @param argv[] 
  * @return int 
  */
 int main(int argc,char*argv[])
