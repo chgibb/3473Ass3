@@ -1,26 +1,43 @@
+/*
+    The program will take in the path to a file to read matrices for the Banker's algorithm from.
+    It will then evaluate if the system is safe.
+*/
 #include <iostream>
 #include <fstream>
 
 #include "bankers.hpp"
 
+/**
+ * @brief 
+ * 
+ * Main entry
+ * 
+ * @param argc 
+ * @param argv[] 
+ * @return int 
+ */
 int main(int argc,char*argv[])
 {
-    int processes = 0;
-    int resources = 0;
-    std::ifstream inFile(argv[1],std::ios::in);
+    //take exactly 1 argument
+    if(argc < 2)
     {
-        std::string lineStr;
-        std::getline(inFile,lineStr);
-        char*line = (char*)lineStr.c_str();
-        char*split = std::strtok(line," ");
-        processes = std::atoi(split);
-        split = std::strtok(NULL," ");
-        resources = std::atoi(split);
+        std::cerr<<"Insufficient arguments"<<std::endl;
+        return 1;
     }
 
-    Comp3473Ass3::Bankers bankers(processes,resources);
+    if(argc > 2)
+    {
+        std::cerr<<"Too many arguments"<<std::endl;
+        return 1;
+    }
+
+    std::ifstream inFile(argv[1],std::ios::in);
+
+    //load system from file
+    Comp3473Ass3::Bankers bankers;
     bankers.loadFromStream<std::ifstream>(inFile);
 
+    //evaluate and print safety
     bool isSafe = bankers.isSafe();
     if(isSafe)
         std::cout<<"Safe state"<<std::endl;

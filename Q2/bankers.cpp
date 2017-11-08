@@ -77,7 +77,14 @@ bool Comp3473Ass3::Bankers::check(int i)
     return true;
 }
 
+Comp3473Ass3::Bankers::Bankers() = default;
+
 Comp3473Ass3::Bankers::Bankers(int processes,int resources) : processes(processes),resources(resources)
+{
+    this->constructMatrices(processes,resources);
+}
+
+void Comp3473Ass3::Bankers::constructMatrices(int processes,int resources)
 {
     this->maxResources = std::vector<std::vector<int>>(
         this->processes,
@@ -103,8 +110,6 @@ Comp3473Ass3::Bankers::Bankers(int processes,int resources) : processes(processe
         this->processes,
         std::vector<int>(this->resources)
     );
-
-    
 }
 
 Comp3473Ass3::Bankers::~Bankers() = default;
