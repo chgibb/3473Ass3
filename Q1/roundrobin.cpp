@@ -5,7 +5,7 @@
 #include <list>
 #include "roundrobin.hpp"
 
-void ::RoundRobin::initForRun()
+void Comp3473Ass3::RoundRobin::initForRun()
 {
     this->ticks = 0;
     this->procQueue.clear();
@@ -23,7 +23,7 @@ void ::RoundRobin::initForRun()
                 this->notArrived.push_back(&(*it));
             }
         }
-        this->notArrived.sort([this](::Process*&a,::Process*&b) -> bool{
+        this->notArrived.sort([this](Comp3473Ass3::Process*&a,Comp3473Ass3::Process*&b) -> bool{
             return a->arrivalTime < b->arrivalTime;
         });
         #ifdef LOGRUNNINGQUEUE
@@ -37,9 +37,9 @@ void ::RoundRobin::initForRun()
         throw std::runtime_error("At least one process must have an arrival time of 0");
 }
 
-void ::RoundRobin::preemptRunningProcess()
+void Comp3473Ass3::RoundRobin::preemptRunningProcess()
 {
-    ::Process*runningProc;
+    Comp3473Ass3::Process*runningProc;
     runningProc = &(*this->procQueue.front());
     #ifdef LOGRUNNINGQUEUE
         std::cout<<"preempting "<<runningProc->id<<std::endl;
@@ -48,7 +48,7 @@ void ::RoundRobin::preemptRunningProcess()
     this->procQueue.push_back(runningProc);
 }
 
-void ::RoundRobin::incrementWaitingTimes()
+void Comp3473Ass3::RoundRobin::incrementWaitingTimes()
 {
     if(this->procQueue.size() == 1)
         return;
@@ -60,10 +60,10 @@ void ::RoundRobin::incrementWaitingTimes()
     }
 }
 
-void ::RoundRobin::runQueueWithProcesses()
+void Comp3473Ass3::RoundRobin::runQueueWithProcesses()
 {
     this->initForRun();
-    ::Process*running;
+    Comp3473Ass3::Process*running;
     int ticksSinceLastPreempt = 0;
     while(!this->notArrived.empty() || !this->procQueue.empty())
     {
@@ -115,4 +115,4 @@ void ::RoundRobin::runQueueWithProcesses()
     #endif
 }
 
-::RoundRobin::RoundRobin() = default;
+Comp3473Ass3::RoundRobin::RoundRobin() = default;

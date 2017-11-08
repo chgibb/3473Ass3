@@ -1,3 +1,3 @@
 #include "process.hpp"
 
-::Process::Process() = default;
+Comp3473Ass3::Process::Process() = default;

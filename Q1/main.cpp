@@ -38,7 +38,7 @@ int main(int argc,char*argv[])
 
     std::ifstream inFile(argv[1],std::ios::in);
 
-    ::RoundRobin rr;
+    Comp3473Ass3::RoundRobin rr;
 
     //populate processes for round robin from input file
     rr.loadFromStream<std::ifstream>(inFile);
