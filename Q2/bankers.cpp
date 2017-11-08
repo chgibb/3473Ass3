@@ -30,4 +30,27 @@
     
 }
 
+void ::Bankers::setMatrix(std::vector<std::vector<int>>&matrix,std::vector<int>&con)
+{
+    int k = 0;
+    for(int i = 0; i < this->processes; ++i)
+    {
+        for(int j = 0; j < this->resources; ++j)
+        {
+            matrix[i][j] = con[k];
+            ++k;
+        }
+    }
+}
+
+void ::Bankers::setAvailableMatrix(std::vector<int>&con)
+{
+    int k = 0;
+    for(int i = 0; i < this->resources; ++i)
+    {
+        this->availResources[0][i] = con[k];
+        ++k;
+    }
+}
+
 ::Bankers::~Bankers() = default;
