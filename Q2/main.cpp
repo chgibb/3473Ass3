@@ -28,5 +28,11 @@ int main(int argc,char*argv[])
     bankers.setMatrix(bankers.allocatedResources,allocMatrix);
     bankers.setMatrix(bankers.maxResources,maxMatrix);
     bankers.setAvailableMatrix(availMatrix);
+
+    bool isSafe = bankers.isSafe();
+    if(isSafe)
+        std::cout<<"Safe state"<<std::endl;
+    else
+        std::cout<<"Unsafe state"<<std::endl;
     return 0;
 }

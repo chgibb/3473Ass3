@@ -1,3 +1,5 @@
+//Adapted from http://javaingrab.blogspot.ca/2013/06/implementation-of-bankers-algorithm.html
+
 #include "bankers.hpp"
 
 void ::Bankers::setMatrix(std::vector<std::vector<int>>&matrix,std::vector<int>&con)
@@ -21,6 +23,58 @@ void ::Bankers::setAvailableMatrix(std::vector<int>&con)
         this->availResources[0][i] = con[k];
         ++k;
     }
+}
+
+bool ::Bankers::isSafe()
+{
+    this->calculateRequired();
+    bool done[this->processes];
+    int j = 0;
+    while(j < this->processes)
+    {
+        bool allocated = false;
+        for(int i = 0; i < this->processes; ++i)
+        {
+            if(!done[i] || check(i))
+            {
+                for(int k = 0; k < this->resources; ++k)
+                {
+                    this->availResources[0][k] = this->availResources[0][k] - this->requiredResources[i][k] + this->maxResources[i][k];
+                }
+                allocated = true;
+                done[i] = true;
+                ++j;
+            }
+            if(!allocated)
+                break;
+        }
+    }
+    if(j == this->processes)
+        return true;
+    else
+        return false;
+}
+
+std::vector<std::vector<int>>&::Bankers::calculateRequired()
+{
+    for(int i = 0; i < this->processes; ++i)
+    {
+        for(int j = 0; j < this->resources; ++j)
+        {
+            this->requiredResources[i][j] = this->maxResources[i][j] - this->allocatedResources[i][j];
+        }
+    }
+    return this->requiredResources;
+}
+
+bool ::Bankers::check(int i)
+{
+    for(int j = 0; j < this->resources; ++j)
+    {
+        if(this->availResources[0][j] < this->requiredResources[i][j])
+            return false;
+    }
+    return true;
 }
 
 ::Bankers::Bankers(int processes,int resources) : processes(processes),resources(resources)
