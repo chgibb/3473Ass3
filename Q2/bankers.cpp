@@ -2,7 +2,7 @@
 
 #include "bankers.hpp"
 
-void ::Bankers::setMatrix(std::vector<std::vector<int>>&matrix,std::vector<int>&con)
+void Comp3473Ass3::Bankers::setMatrix(std::vector<std::vector<int>>&matrix,std::vector<int>&con)
 {
     int k = 0;
     for(int i = 0; i < this->processes; ++i)
@@ -15,7 +15,7 @@ void ::Bankers::setMatrix(std::vector<std::vector<int>>&matrix,std::vector<int>&
     }
 }
 
-void ::Bankers::setAvailableMatrix(std::vector<int>&con)
+void Comp3473Ass3::Bankers::setAvailableMatrix(std::vector<int>&con)
 {
     int k = 0;
     for(int i = 0; i < this->resources; ++i)
@@ -25,7 +25,7 @@ void ::Bankers::setAvailableMatrix(std::vector<int>&con)
     }
 }
 
-bool ::Bankers::isSafe()
+bool Comp3473Ass3::Bankers::isSafe()
 {
     this->calculateRequired();
     bool done[this->processes];
@@ -55,7 +55,7 @@ bool ::Bankers::isSafe()
         return false;
 }
 
-std::vector<std::vector<int>>&::Bankers::calculateRequired()
+std::vector<std::vector<int>>&Comp3473Ass3::Bankers::calculateRequired()
 {
     for(int i = 0; i < this->processes; ++i)
     {
@@ -67,7 +67,7 @@ std::vector<std::vector<int>>&::Bankers::calculateRequired()
     return this->requiredResources;
 }
 
-bool ::Bankers::check(int i)
+bool Comp3473Ass3::Bankers::check(int i)
 {
     for(int j = 0; j < this->resources; ++j)
     {
@@ -77,7 +77,7 @@ bool ::Bankers::check(int i)
     return true;
 }
 
-::Bankers::Bankers(int processes,int resources) : processes(processes),resources(resources)
+Comp3473Ass3::Bankers::Bankers(int processes,int resources) : processes(processes),resources(resources)
 {
     this->maxResources = std::vector<std::vector<int>>(
         this->processes,
@@ -107,4 +107,4 @@ bool ::Bankers::check(int i)
     
 }
 
-::Bankers::~Bankers() = default;
+Comp3473Ass3::Bankers::~Bankers() = default;

@@ -4,7 +4,7 @@
 
 int main(int argc,char*argv[])
 {
-    ::Bankers bankers(5,4);
+    Comp3473Ass3::Bankers bankers(5,4);
     std::vector<int> allocMatrix{
         2,0,0,1,
         3,1,2,1,
